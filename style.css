@@ -226,6 +226,10 @@ body {
         margin: 5px;
     }
 
+    .sticky-top {
+        overflow: hidden;
+    }
+
     .mynavbar .nav-link {
         font-size: 2rem;
         text-align: center;
