@@ -25,6 +25,12 @@
 
 <body>
 
+  <div class="floating-hearts">
+    <div class="floating-heart" style="left:10%; top:20%">❤️</div>
+    <div class="floating-heart" style="left:70%; top:50%">❤️</div>
+    <div class="floating-heart" style="left:30%; top:70%">❤️</div>
+  </div>
+
   <section id="hero"
     class="hero w-100 h-100 p-3 mx-auto text-center d-flex justify-content-center align-items-center text-white">
     <main>
@@ -72,7 +78,7 @@
         </div>
       </div>
 
-      <div class="row couple position-relative">
+      <div class="row couple position-relative scroll-animate">
         <div class="col-lg-6">
           <div class="row">
             <div class="col-8 text-end">
@@ -118,9 +124,9 @@
         </div>
       </div>
 
-      <div class="row justify-content-center mt-4">
-        <div class="col-md-5 col-10">
-          <div class="card text-center text-bg-light mb-5">
+      <div class="row justify-content-center mt-4 gx-5 gy-4">
+        <div class="col-md-5 col-10 mb-4 mb-md-0 scroll-animate">
+          <div class="card text-center text-bg-light">
             <div class="card-header">Akad Nikah</div>
             <div class="card-body">
               <div class="row justify-content-center">
@@ -139,7 +145,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-5 col-10">
+        <div class="col-md-5 col-10 scroll-animate">
           <div class="card text-center text-bg-light">
             <div class="card-header">Resepsi</div>
             <div class="card-body">
@@ -189,6 +195,28 @@
     });
 
   </script>
+
+<script>
+  // Animasi scroll
+  const scrollElements = document.querySelectorAll('.scroll-animate');
+  
+  const elementInView = (el) => {
+      const elementTop = el.getBoundingClientRect().top;
+      return elementTop <= (window.innerHeight || document.documentElement.clientHeight);
+  };
+  
+  const animateOnScroll = () => {
+      scrollElements.forEach(element => {
+          if(elementInView(element)) {
+              element.classList.add('animated');
+          }
+      });
+  };
+  
+  window.addEventListener('scroll', animateOnScroll);
+  window.addEventListener('load', animateOnScroll);
+</script>
+
 </body>
 
 </html>

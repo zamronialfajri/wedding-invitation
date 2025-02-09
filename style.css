@@ -1,7 +1,15 @@
 :root {
     --pink: #f14e95;
+    --secondary: #ffb6c1;
+    --accent: #ffd700;
+    --text: #4a4a4a;
     --bg: #0a0a0a;
-    --shadow: 0 2px 2px rgb(0 0 0 / 0.5);
+    --dark: #2f4f4f;
+    --shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    transition: all 0.3s ease-in-out;
 }
 
 body {
@@ -10,6 +18,59 @@ body {
     min-height: 2000px;
 }
 
+/* ========== HATI MELAYANG ========== */
+.floating-hearts {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.floating-heart {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0.15;
+    animation: float 8s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { 
+        transform: translateY(0) rotate(0deg) scale(0.8); 
+    }
+    50% { 
+        transform: translateY(-100px) rotate(20deg) scale(1.2); 
+    }
+}
+
+/* Animasi Scroll */
+.scroll-animate {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease-out;
+}
+
+.scroll-animate.animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Delay untuk elemen berbeda */
+.home .couple {
+    transition-delay: 0.2s;
+}
+
+.info .card:first-child {
+    transition-delay: 0.4s;
+}
+
+.info .card:last-child {
+    transition-delay: 0.6s;
+}
+
+/* Hero */
 .hero::before {
     content: '';
     position: absolute;
@@ -27,6 +88,7 @@ body {
 .hero {
     position: relative;
     min-height: 100vh;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
 }
 
 .hero h1, .hero h4, .hero p {
@@ -36,6 +98,31 @@ body {
 .hero h1 {
     font-family: 'Sacramento', cursive;
     font-size: 6rem;
+    position: relative;
+    display: inline-block;
+}
+
+.hero h1:hover {
+    text-shadow: 0 0 20px rgba(255,255,255,0.5);
+    transform: rotate(-2deg) scale(1.05);
+}
+
+.hero h1::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 120%;
+    height: 120%;
+    /* background: radial-gradient(circle, var(--pink) 0%, transparent 60%); */
+    opacity: 0;
+    transition: opacity 0.3s;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
+
+.hero h1:hover::after {
+    opacity: 0.3;
 }
 
 .hero h4 {
@@ -47,7 +134,8 @@ body {
 }
 
 .hero a {
-    color: var(--pink);
+    background: var(--accent);
+    color: var(--dark);
     background-color: white;
     box-shadow: var(--shadow);
     transition: all 0.3s;
@@ -59,8 +147,35 @@ body {
     transform: translateY(-5px);
 }
 
+.btn {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(255,255,255,0.1);
+    transform: rotate(45deg);
+    transition: all 0.4s;
+}
+
+.btn:hover::after {
+    transform: translateX(100%) rotate(45deg);
+}
+
 .mynavbar {
-    background-color: rgba(255, 255, 255, 0.3) !important;
+    background-color: rgba(255, 250, 250, 0.9) !important;
     backdrop-filter: blur(4px);
     border-bottom: 0.1px solid var(--bg);
 }
@@ -77,6 +192,28 @@ body {
 
 .mynavbar .nav-link {
     text-transform: uppercase;
+    position: relative;
+    padding-bottom: 5px;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--pink);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.nav-link:hover {
+    color: var(--pink) !important;
+    transform: translateY(-2px);
 }
 
 .home {
@@ -123,6 +260,17 @@ body {
     /* max-width: 200px; Batasi ukuran maksimum */
     /* display: block; Agar gambar tidak ada space bawah */
     /* margin: 0 auto; Untuk posisi tengah di mobile */
+    transform: scale(1);
+    filter: grayscale(0.3);
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
+.home .couple img:hover {
+    transform: scale(1.05);
+    filter: grayscale(0);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    border-radius: 20px !important;
 }
 
 .home .heart {
@@ -137,6 +285,17 @@ body {
     top: 35%;
     transform: translate(-50%, -50%);
     z-index: 1;
+}
+
+.heart:hover {
+    animation: pulse 1s infinite;
+    cursor: pointer;
+}
+
+@keyframes pulse {
+    0% { transform: translate(-50%, -45%) scale(1); }
+    50% { transform: translate(-50%, -45%) scale(1.2); }
+    100% { transform: translate(-50%, -45%) scale(1); }
 }
 
 .home .heart i {
@@ -167,10 +326,14 @@ body {
     border: 1px solid #999;
     height: 100%;
     transition: all 0.3s;
+    transform: translateY(0);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
 .info .card:hover {
-    transform: translateY(-5px);
+    /* transform: translateY(-5px); */
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
 }
 
 .info .card-header {
@@ -190,6 +353,21 @@ body {
     font-size: 0.9rem;
     font-weight: 300;
 }
+
+.info .bi {
+    transition: all 0.5s;
+}
+
+.info .bi-clock:hover {
+    transform: rotate(360deg);
+    color: var(--pink) !important;
+}
+
+.info .bi-calendar3:hover {
+    transform: scale(1.2);
+    color: var(--pink) !important;
+}
+
 
 
 /* Media Query */
@@ -234,6 +412,14 @@ body {
         font-size: 2rem;
         text-align: center;
     }
+
+    .floating-heart {
+        display: none;
+    }
+    
+    .scroll-animate {
+        transition: all 0.5s ease-out;
+    }
 }
 
 /* Mobile Phone */
@@ -250,4 +436,13 @@ body {
         padding: 45px;
         margin: 3px;
     }
+
+    .info .col-md-5 {
+        margin-bottom: 2rem !important;
+    }
+    
+    .info .col-md-5:last-child {
+        margin-bottom: 0 !important;
+    }
 }
+
